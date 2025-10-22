@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 import type { Message } from '../types';
 import { BrainCircuitIcon } from './Icons';
+import CodeBlock from './CodeBlock';
 
 interface ChatMessageProps {
   message: Message;
@@ -39,7 +42,21 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
             <p className="text-sm leading-relaxed">{userMessageContent}</p>
         ) : (
             <div className="prose prose-sm dark:prose-invert max-w-none text-gray-800 dark:text-gray-200">
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                <ReactMarkdown 
+                  remarkPlugins={[remarkGfm, remarkMath]}
+                  rehypePlugins={[rehypeKatex]}
+                  components={{
+                    pre: (props) => {
+                      const child = props.children[0];
+                      if (React.isValidElement(child) && child.type === 'code') {
+                          // FIX: Cast `child.props` to a compatible type. This resolves issues with `unknown`
+                          // props and ensures the `children` prop, required by `CodeBlock`, is present.
+                          return <CodeBlock {...(child.props as { children: React.ReactNode; className?: string })} />;
+                      }
+                      return <pre {...props} />;
+                    },
+                  }}
+                >
                     {message.text}
                 </ReactMarkdown>
             </div>
