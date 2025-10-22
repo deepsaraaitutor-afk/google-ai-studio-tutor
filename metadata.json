@@ -1,0 +1,5 @@
+{
+  "name": "AI Polymath Tutor",
+  "description": "An interactive chatbot powered by Gemini that acts as a polymath tutor, capable of explaining complex topics in a clear and engaging way.",
+  "requestFramePermissions": []
+}
