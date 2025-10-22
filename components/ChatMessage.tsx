@@ -19,10 +19,13 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
   ));
 
   return (
-    <div className={`flex items-start gap-3 my-4 animate-fade-in-up ${isUser ? 'justify-end' : ''}`}>
+    <li className={`flex items-start gap-3 my-4 animate-fade-in-up ${isUser ? 'justify-end' : ''}`}>
       {!isUser && (
-        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center">
-            <BrainCircuitIcon className="w-5 h-5 text-white" />
+        <div 
+          className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center"
+          aria-label="AI Tutor Avatar"
+        >
+            <BrainCircuitIcon className="w-5 h-5 text-white" aria-hidden="true" />
         </div>
       )}
       <div
@@ -42,7 +45,7 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
             </div>
         )}
       </div>
-    </div>
+    </li>
   );
 };
 

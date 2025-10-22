@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { SendIcon } from './Icons';
 
@@ -48,6 +47,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading }) => {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Ask me anything..."
+            aria-label="Chat input"
             className="w-full pl-4 pr-12 py-3 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-2xl border-transparent focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow duration-200 resize-none max-h-40 overflow-y-auto"
             rows={1}
             disabled={isLoading}
@@ -56,6 +56,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading }) => {
         <button
           type="submit"
           disabled={isLoading || !input.trim()}
+          aria-label={isLoading ? "Sending..." : "Send message"}
           className="w-12 h-12 flex items-center justify-center bg-blue-500 text-white rounded-full transition-colors duration-200 enabled:hover:bg-blue-600 disabled:bg-blue-300 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800"
         >
           {isLoading ? (
